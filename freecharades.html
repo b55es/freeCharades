@@ -60,7 +60,6 @@
             startButton.addEventListener("click", function() {
                 setScore(0);
                 currentWordList = [...originalWordList];
-                setTimeout(showRandomWord,3000);
                 let time = 3;
                 const timerParagraph = document.getElementById("timer");
                 timerParagraph.innerHTML = time;
@@ -71,6 +70,7 @@
                         timerParagraph.innerHTML = time -= 1;
                         if (time === 0) {
                             clearInterval(intervalId);
+                            showRandomWord();
                         }
                     }
                 }, 1000)
