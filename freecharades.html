@@ -25,6 +25,7 @@
             const originalWordList = ["dog", "lion", "cat", "monkey"];
             let currentWordList = [];
             let score = 0;
+            let time;
 
             //getting html references to js variables
             const wrongButton = document.getElementById("wrong");
@@ -57,17 +58,22 @@
                 setScore(++score);
             });
 
+            const setTime = (timeToSet) => {
+                time = timeToSet;
+                const timerParagraph = document.getElementById("timer");
+                timerParagraph.innerHTML = time;
+            }
+
             startButton.addEventListener("click", function() {
                 setScore(0);
                 currentWordList = [...originalWordList];
-                let time = 3;
-                const timerParagraph = document.getElementById("timer");
-                timerParagraph.innerHTML = time;
+                
+                setTime(3);
 
                 // Run function every second
                 const intervalId = setInterval(() => {
                     if (time > 0) {
-                        timerParagraph.innerHTML = time -= 1;
+                        setTime(time - 1);
                     }
                     if (time === 0) {
                         clearInterval(intervalId);
