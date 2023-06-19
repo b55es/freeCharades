@@ -66,9 +66,12 @@
                 timerParagraph.innerHTML = time;
 
                 // Run function every second
-                setInterval(() => {
+                const intervalId = setInterval(() => {
                     if (time > 0) {
-                        timerParagraph.innerHTML = time -= 1
+                        timerParagraph.innerHTML = time -= 1;
+                        if (time === 0) {
+                            clearInterval(intervalId);
+                        }
                     }
                 }, 1000)
             });
