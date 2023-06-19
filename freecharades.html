@@ -68,10 +68,10 @@
                 const intervalId = setInterval(() => {
                     if (time > 0) {
                         timerParagraph.innerHTML = time -= 1;
-                        if (time === 0) {
-                            clearInterval(intervalId);
-                            showRandomWord();
-                        }
+                    }
+                    if (time === 0) {
+                        clearInterval(intervalId);
+                        showRandomWord();
                     }
                 }, 1000)
             });
