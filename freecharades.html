@@ -20,47 +20,44 @@
         </button>
         <p id="score">Score</p>
         <script>
-            // create a word list
+            // Initial states
             const wordList = ["dog", "lion", "cat", "monkey"];
+            let score = 0;
 
-            //create a wrong button
-            const wrongButton = document.querySelector('#wrong');
-            const word = document.getElementById("word");
-            
-            wrongButton.addEventListener("click", function(){
+            //getting html references to js variables
+            const wrongButton = document.getElementById("wrong");
+            const correctButton = document.getElementById("correct");
+            const startButton = document.getElementById("start");
+            const wordParagraph = document.getElementById("word");
+            const scoreParagraph = document.getElementById("score");
+
+            const setScore = (scoreToSet) => {
+                score = scoreToSet;
+                scoreParagraph.innerHTML = score;
+            }
+
+            const showRandomWord = () => {
                 const randomIndex = Math.floor(Math.random() * wordList.length); 
                 const newWord = wordList[randomIndex];
                 // after we select the word, we remove it from the list
                 wordList.splice(randomIndex, 1);
-                word.innerHTML = newWord;
+                wordParagraph.innerHTML = newWord;
+            }
+
+            setScore(0);
+            
+            wrongButton.addEventListener("click", function(){
+                showRandomWord()
             });
             
-            //create a variable for keeping scores, and a correct button
-            let score = 0;
-            const correctButton = document.querySelector('#correct');
-            const showScore = document.getElementById("score");
-            showScore.innerHTML = score;
-
             correctButton.addEventListener("click", function(){
-                const randomIndex = Math.floor(Math.random() * wordList.length); 
-                const newWord = wordList[randomIndex];
-            // after we select the word, we remove it from the list
-                wordList.splice(randomIndex, 1);
-                word.innerHTML = newWord;
-                score += 1;
-                showScore.innerHTML = score;
+                showRandomWord();
+                setScore(++score);
             });
 
-            //create a start button
-            const startButton = document.querySelector('#start');
             startButton.addEventListener("click", function(){
-                score = 0;
-                showScore.innerHTML = score;
+                setScore(0)
             });
-
-
-
-
         </script>
     </body>
 </html>
