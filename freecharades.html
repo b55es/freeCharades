@@ -10,24 +10,57 @@
         <h1>Free Charades</h1>
         <p>This is fun!</p>
         <p id="word">Hampster</p>
-        <button>
-            Next word
+        <button id="start">Start</button>
+        <button id="end">End</button>
+        <button id="wrong">
+            Wrong
         </button>
+        <button id="correct">
+            Correct
+        </button>
+        <p id="score">Score</p>
         <script>
             // create a word list
             const wordList = ["dog", "lion", "cat", "monkey"];
 
-            //create a button
-            const button = document.querySelector('button');
+            //create a wrong button
+            const wrongButton = document.querySelector('#wrong');
             const word = document.getElementById("word");
             
-            button.addEventListener("click", function(){
+            wrongButton.addEventListener("click", function(){
                 const randomIndex = Math.floor(Math.random() * wordList.length); 
                 const newWord = wordList[randomIndex];
                 // after we select the word, we remove it from the list
                 wordList.splice(randomIndex, 1);
                 word.innerHTML = newWord;
             });
+            
+            //create a variable for keeping scores, and a correct button
+            let score = 0;
+            const correctButton = document.querySelector('#correct');
+            const showScore = document.getElementById("score");
+            showScore.innerHTML = score;
+
+            correctButton.addEventListener("click", function(){
+                const randomIndex = Math.floor(Math.random() * wordList.length); 
+                const newWord = wordList[randomIndex];
+            // after we select the word, we remove it from the list
+                wordList.splice(randomIndex, 1);
+                word.innerHTML = newWord;
+                score += 1;
+                showScore.innerHTML = score;
+            });
+
+            //create a start button
+            const startButton = document.querySelector('#start');
+            startButton.addEventListener("click", function(){
+                score = 0;
+                showScore.innerHTML = score;
+            });
+
+
+
+
         </script>
     </body>
 </html>
