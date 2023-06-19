@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Free Charades</title>
+
+    </head>
+    <body>
+        <h1>Free Charades</h1>
+        <p>This is fun!</p>
+        <p id="word">Hampster</p>
+        <button>
+            Next word
+        </button>
+        <script>
+            // create a word list
+            const wordList = ["dog", "lion", "cat", "monkey"];
+
+            //create a button
+            const button = document.querySelector('button');
+            const word = document.getElementById("word");
+            
+            button.addEventListener("click", function(){
+                const randomIndex = Math.floor(Math.random() * wordList.length); 
+                const newWord = wordList[randomIndex];
+                // after we select the word, we remove it from the list
+                wordList.splice(randomIndex, 1);
+                word.innerHTML = newWord;
+            });
+        </script>
+    </body>
+</html>
