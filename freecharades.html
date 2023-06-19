@@ -21,10 +21,15 @@
         </button>
         <p id="score">Score</p>
         <script>
+
+            // Constants
+            const COUNTDOWN_DURATION_SECONDS = 3;
+            const STARTING_SCORE = 0;
+
             // Initial states
             const originalWordList = ["dog", "lion", "cat", "monkey"];
             let currentWordList = [];
-            let score = 0;
+            let score = STARTING_SCORE;
             let time;
 
             //getting html references to js variables
@@ -47,7 +52,7 @@
                 wordParagraph.innerHTML = newWord;
             }
 
-            setScore(0);
+            setScore(STARTING_SCORE);
             
             wrongButton.addEventListener("click", function(){
                 showRandomWord()
@@ -65,10 +70,10 @@
             }
 
             startButton.addEventListener("click", function() {
-                setScore(0);
+                setScore(STARTING_SCORE);
                 currentWordList = [...originalWordList];
                 
-                setTime(3);
+                setTime(COUNTDOWN_DURATION_SECONDS);
 
                 // Run function every second
                 const intervalId = setInterval(() => {
