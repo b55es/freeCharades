@@ -21,7 +21,8 @@
         <p id="score">Score</p>
         <script>
             // Initial states
-            const wordList = ["dog", "lion", "cat", "monkey"];
+            const originalWordList = ["dog", "lion", "cat", "monkey"];
+            let currentWordList = [];
             let score = 0;
 
             //getting html references to js variables
@@ -37,10 +38,10 @@
             }
 
             const showRandomWord = () => {
-                const randomIndex = Math.floor(Math.random() * wordList.length); 
-                const newWord = wordList[randomIndex];
+                const randomIndex = Math.floor(Math.random() * currentWordList.length);
+                const newWord = currentWordList[randomIndex];
                 // after we select the word, we remove it from the list
-                wordList.splice(randomIndex, 1);
+                currentWordList.splice(randomIndex, 1);
                 wordParagraph.innerHTML = newWord;
             }
 
@@ -55,9 +56,11 @@
                 setScore(++score);
             });
 
-            startButton.addEventListener("click", function(){
-                setScore(0)
+            startButton.addEventListener("click", function() {
+                setScore(0);
+                currentWordList = [...originalWordList];
             });
+
         </script>
     </body>
 </html>
