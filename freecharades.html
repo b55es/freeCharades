@@ -53,6 +53,19 @@
                 wordParagraph.innerHTML = newWord;
             }
 
+            const countDown = (duration, callback) => {
+                setTime(duration);
+                const intervalId = setInterval(() => {
+                    if (time > 0) {
+                        setTime(time - 1);
+                    }
+                    if (time === 0) {
+                        clearInterval(intervalId);
+                        callback();
+                    }
+                }, 1000)
+            }
+
             setScore(STARTING_SCORE);
             
             wrongButton.addEventListener("click", function(){
@@ -74,32 +87,13 @@
                 setScore(STARTING_SCORE);
                 currentWordList = [...originalWordList];
                 
-                setTime(COUNTDOWN_DURATION_SECONDS);
-
-                // Run function every second
-
-                const intervalId = setInterval(() => {
-                    if (time > 0) {
-                        setTime(time - 1);
-                    }
-                    if (time === 0) {
-                        clearInterval(intervalId);
-                        showRandomWord();
-
-                        setTime(SESSION_DURATION_SECONDS);
-                        const intervalId2 = setInterval(() => {
-                            if (time > 0) {
-                                setTime(time - 1);
-                            }
-                            if (time === 0) {
-                                clearInterval(intervalId2);
-                                console.log("end");
-                            }
-                        }, 1000)
-                    }
-                }, 1000)
+                countDown(COUNTDOWN_DURATION_SECONDS, () => { 
+                    showRandomWord();
+                    countDown(SESSION_DURATION_SECONDS, () => {
+                        console.log("end")
+                    })
+                });
             });
-
         </script>
     </body>
 </html>
