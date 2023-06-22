@@ -167,6 +167,8 @@
 
             const wordParagraph = document.getElementById("word");
             const scoreParagraph = document.getElementById("score");
+            const timerParagraph = document.getElementById("timer");
+            const playTimerParagraph = document.getElementById("play-timer");
 
             const startingScreen = document.getElementById("starting-screen");
             const flipScreen180 = document.getElementById("flip-180-screen");
@@ -284,9 +286,7 @@
 
             const setTime = (timeToSet) => {
                 time = timeToSet;
-                const timerParagraph = document.getElementById("timer");
                 timerParagraph.innerHTML = time;
-                const playTimerParagraph = document.getElementById("play-timer");
                 playTimerParagraph.innerHTML = time;
             }
         </script>
