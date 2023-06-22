@@ -178,9 +178,7 @@
                 "goat"
             ];
             let currentWordList = [];
-            // let resultWordList = [];
             let resultWordList = [];
-            let score = STARTING_SCORE;
             let time;
 
             //getting html references to js variables
@@ -199,12 +197,13 @@
             const timerParagraph = document.getElementById("timer");
             const playTimerParagraph = document.getElementById("play-timer");
             const listOfWords = document.getElementById("list-of-words");
+            const numberOfWords = document.getElementById("number-of-words");
 
             const startingScreen = document.getElementById("starting-screen");
             const flipScreen180 = document.getElementById("flip-180-screen");
             const flipScreen90 = document.getElementById("flip-90-screen");
             const instructionScreen = document.getElementById("instruction-screen");
-            const acknowledgementsScreen =document.getElementById("acknowledgements-screen");
+            const acknowledgementsScreen = document.getElementById("acknowledgements-screen");
             const countdownScreen = document.getElementById("countdown-screen");
             const wordScreen = document.getElementById("word-screen");
             const endingScreen = document.getElementById("ending-screen");
@@ -249,9 +248,20 @@
                 console.log(resultWordList);
             }
 
+            function showScore() {
+                let score = 0;
+                for (i = 0; i < resultWordList.length; i++) {
+                    if (resultWordList[i].correct === true) {
+                        score++
+                    };
+                }
+                scoreParagraph.innerHTML = score;
+                numberOfWords.innerHTML = "/" + resultWordList.length;
+            }
+
             function gameStart() {
                 setActive(countdownScreen);
-                setScore(STARTING_SCORE);
+                resultWordList = [];
                 currentWordList = [...originalWordList];
                 
                 countDown(COUNTDOWN_DURATION_SECONDS, () => { 
@@ -260,17 +270,11 @@
                 
                     countDown(SESSION_DURATION_SECONDS, () => {
                         showResultList();
+                        showScore()
                         setActive(endingScreen);
                     })
                 });
             }
-
-            const setScore = (scoreToSet) => {
-                score = scoreToSet;
-                scoreParagraph.innerHTML = score;
-            }
-
-            setScore(STARTING_SCORE);
 
             const countDown = (duration, callback) => {
                 setTime(duration);
@@ -346,7 +350,6 @@
             correctButton.addEventListener("click", function(){
                 storeWord(true);
                 showRandomWord();
-                setScore(++score);
             });
 
         </script>
