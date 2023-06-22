@@ -203,6 +203,56 @@
                 } 
             }
 
+            function gameStart() {
+                setActive(countdownScreen);
+                setScore(STARTING_SCORE);
+                currentWordList = [...originalWordList];
+                
+                countDown(COUNTDOWN_DURATION_SECONDS, () => { 
+                    setActive(wordScreen);
+                    showRandomWord();
+                
+                    countDown(SESSION_DURATION_SECONDS, () => {
+                        setActive(endingScreen);
+                        console.log("end")
+                    })
+                });
+            }
+
+            const setScore = (scoreToSet) => {
+                score = scoreToSet;
+                scoreParagraph.innerHTML = score;
+            }
+
+            setScore(STARTING_SCORE);
+
+            const showRandomWord = () => {
+                const randomIndex = Math.floor(Math.random() * currentWordList.length);
+                const newWord = currentWordList[randomIndex];
+                // after we select the word, we remove it from the list
+                currentWordList.splice(randomIndex, 1);
+                wordParagraph.innerHTML = newWord;
+            }
+
+            const countDown = (duration, callback) => {
+                setTime(duration);
+                const intervalId = setInterval(() => {
+                    if (time > 0) {
+                        setTime(time - 1);
+                    }
+                    if (time === 0) {
+                        clearInterval(intervalId);
+                        callback();
+                    }
+                }, 1000);
+            }
+
+            const setTime = (timeToSet) => {
+                time = timeToSet;
+                timerParagraph.innerHTML = time;
+                playTimerParagraph.innerHTML = time;
+            }
+
             instructionButton.addEventListener("click", function(){
                 setActive(instructionScreen)
             });
@@ -223,21 +273,6 @@
                 setActive(startingScreen)
             });
 
-            function gameStart() {
-                setActive(countdownScreen);
-                setScore(STARTING_SCORE);
-                currentWordList = [...originalWordList];
-                
-                countDown(COUNTDOWN_DURATION_SECONDS, () => { 
-                    setActive(wordScreen);
-                    showRandomWord();
-                
-                    countDown(SESSION_DURATION_SECONDS, () => {
-                        setActive(endingScreen);
-                        console.log("end")
-                    })
-                });
-            }
 
             startButton.addEventListener("click", function() {
                 gameStart()
@@ -247,34 +282,6 @@
                 gameStart()
             });
 
-            const setScore = (scoreToSet) => {
-                score = scoreToSet;
-                scoreParagraph.innerHTML = score;
-            }
-
-            const showRandomWord = () => {
-                const randomIndex = Math.floor(Math.random() * currentWordList.length);
-                const newWord = currentWordList[randomIndex];
-                // after we select the word, we remove it from the list
-                currentWordList.splice(randomIndex, 1);
-                wordParagraph.innerHTML = newWord;
-            }
-
-            const countDown = (duration, callback) => {
-                setTime(duration);
-                const intervalId = setInterval(() => {
-                    if (time > 0) {
-                        setTime(time - 1);
-                    }
-                    if (time === 0) {
-                        clearInterval(intervalId);
-                        callback();
-                    }
-                }, 1000)
-            }
-
-            setScore(STARTING_SCORE);
-            
             wrongButton.addEventListener("click", function(){
                 showRandomWord()
             });
@@ -283,12 +290,6 @@
                 showRandomWord();
                 setScore(++score);
             });
-
-            const setTime = (timeToSet) => {
-                time = timeToSet;
-                timerParagraph.innerHTML = time;
-                playTimerParagraph.innerHTML = time;
-            }
         </script>
     </body>
 </html>
