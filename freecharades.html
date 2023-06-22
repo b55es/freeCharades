@@ -103,11 +103,11 @@
                     <p id="here-were-the-words">Here were the words</p>
                     <div id="word-list">
                         <ul id="list-of-words">
-                            <li>apple</li>
-                            <li>apple</li>
-                            <li>apple</li>
-                            <li>apple</li>
-                            <li>apple</li>
+                            <li class="correct">apple</li>
+                            <li class="incorrect">orange</li>
+                            <li class="correct">banana</li>
+                            <li class="correct">pineapple</li>
+                            <li class="correct">coconut</li>
                             <li>apple</li>
                             <li>apple</li>
                             <li>apple</li>
@@ -149,8 +149,37 @@
             const STARTING_SCORE = 0;
 
             // Initial states
-            const originalWordList = ["dog", "lion", "cat", "monkey"];
+            const originalWordList = [
+                "dog", 
+                "lion", 
+                "cat", 
+                "monkey", 
+                "elephant", 
+                "tiger", 
+                "crocodile", 
+                "whale", 
+                "tuna", 
+                "salmon", 
+                "sea urchin", 
+                "fox", 
+                "eagle", 
+                "parrot",
+                "snake",
+                "frog",
+                "butterfly",
+                "rabbit",
+                "wolf",
+                "bear",
+                "pig",
+                "cow",
+                "chicken",
+                "zebra",
+                "horse",
+                "goat"
+            ];
             let currentWordList = [];
+            // let resultWordList = [];
+            let resultWordList = [];
             let score = STARTING_SCORE;
             let time;
 
@@ -169,6 +198,7 @@
             const scoreParagraph = document.getElementById("score");
             const timerParagraph = document.getElementById("timer");
             const playTimerParagraph = document.getElementById("play-timer");
+            const listOfWords = document.getElementById("list-of-words");
 
             const startingScreen = document.getElementById("starting-screen");
             const flipScreen180 = document.getElementById("flip-180-screen");
@@ -203,6 +233,22 @@
                 } 
             }
 
+            const showRandomWord = () => {
+                const randomIndex = Math.floor(Math.random() * currentWordList.length);
+                const newWord = currentWordList[randomIndex];
+                // after we select the word, we remove it from the list
+                currentWordList.splice(randomIndex, 1);
+                wordParagraph.innerHTML = newWord;
+            }
+
+            function storeWord(correct) {
+                resultWordList.push({
+                    word: wordParagraph.innerHTML,
+                    correct: correct,
+                });
+                console.log(resultWordList);
+            }
+
             function gameStart() {
                 setActive(countdownScreen);
                 setScore(STARTING_SCORE);
@@ -213,8 +259,8 @@
                     showRandomWord();
                 
                     countDown(SESSION_DURATION_SECONDS, () => {
+                        showResultList();
                         setActive(endingScreen);
-                        console.log("end")
                     })
                 });
             }
@@ -225,14 +271,6 @@
             }
 
             setScore(STARTING_SCORE);
-
-            const showRandomWord = () => {
-                const randomIndex = Math.floor(Math.random() * currentWordList.length);
-                const newWord = currentWordList[randomIndex];
-                // after we select the word, we remove it from the list
-                currentWordList.splice(randomIndex, 1);
-                wordParagraph.innerHTML = newWord;
-            }
 
             const countDown = (duration, callback) => {
                 setTime(duration);
@@ -251,6 +289,19 @@
                 time = timeToSet;
                 timerParagraph.innerHTML = time;
                 playTimerParagraph.innerHTML = time;
+            }
+
+            function showResultList() {
+                // clear everything inside the list of words
+                listOfWords.innerHTML = "";
+
+                // for each result I add one li element back into the list of words
+                resultWordList.forEach(result => {
+                    const li = document.createElement("li");
+                    const resultWord = document.createTextNode(result.word);
+                    li.appendChild(resultWord);
+                    listOfWords.appendChild(li);
+                })
             }
 
             instructionButton.addEventListener("click", function(){
@@ -273,7 +324,6 @@
                 setActive(startingScreen)
             });
 
-
             startButton.addEventListener("click", function() {
                 gameStart()
             });
@@ -283,13 +333,16 @@
             });
 
             wrongButton.addEventListener("click", function(){
+                storeWord(false);
                 showRandomWord()
             });
             
             correctButton.addEventListener("click", function(){
+                storeWord(true);
                 showRandomWord();
                 setScore(++score);
             });
+
         </script>
     </body>
 </html>
