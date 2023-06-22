@@ -1,0 +1,280 @@
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    line-height: 1em;
+}
+
+button {
+    border: none;
+}
+
+.screen {
+    background-color: #fdd121;
+    height: 390px;
+    width: 884px;
+    overflow: hidden;
+    font-family: 'Henny Penny', cursive;
+    color: #250f48;
+    padding: 40px;
+    box-sizing: border-box;
+    display: none;
+}
+.logo {
+    height: 48px;
+    width: 48px;
+}
+.brand-name {
+    font-size: 48px;
+    letter-spacing: -0.03em;
+}
+
+#flip-180 {
+    width: 122px;
+}
+
+#instruction-line1 {
+    font-size: 36px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: baseline;
+}
+
+#flip-180-screen-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#flip-180-screen-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#flip-180-screen-content > * + * {
+    margin-top: 20px;
+}
+
+#flip-90 {
+    width: 170px;
+}
+
+#instruction-line2 {
+    font-size: 36px;
+}
+
+#flip-90-screen-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#flip-90-screen-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#flip-90-screen-content > * + * {
+    margin-top: 40px;
+}
+
+#starting-screen-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#starting-screen-content > * + * {
+    margin-top: 20px;
+}
+
+#starting-screen-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.primary-button {
+    color: #fdd121;
+    background-color: #250f48;
+    font-family: 'Henny Penny', cursive;
+    font-size: 36px;
+    line-height: 1em;
+    padding-top: 18px;
+    padding-bottom: 14px;
+    padding-left: 32px;
+    padding-right: 32px;
+    border-radius: 4px;
+    box-shadow: 4px 4px 0px 0px #250f487f;
+}
+
+.back-button,
+.secondary-button {
+    color: #250f48;
+    background-color: #fdd121;
+    font-family: 'Henny Penny', cursive;
+    font-size: 24px;
+}
+
+.back-button {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+
+#how-to-play,
+#acknowledgements {
+    text-align: center;
+    font-size: 48px;
+    font-weight: 400;
+}
+
+#back-home {
+    margin-top: 20px;
+}
+
+#instructions {
+    font-family: 'Alata', sans-serif;
+}
+
+#instruction-screen,
+#acknowledgements-screen {
+    position: relative;
+}
+
+#designers {
+    font-family: 'Alata', sans-serif;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#designers > * {
+    line-height: 1.5em;
+}
+
+a {
+    color: #250f48;
+}
+
+#countdown-screen-content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#timer {
+    font-size: 120px;
+}
+
+#clock {
+    height: 60px;
+    width: 53px;
+    margin-right: 8px
+}
+
+#play-timer {
+    font-size: 60px;
+}
+
+#word{
+    font-size: 120px;
+}
+
+#play-timer, #word {
+    letter-spacing: -0.03em;
+}
+
+#session-time {
+    display: flex;
+    flex-direction: row;
+}
+
+
+#word-screen-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#ending-screen-content {
+    display: flex;
+    height: 100%;
+}
+
+#left {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    padding-right: 60px;
+    padding-left: 40px;
+}
+
+#right {
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    align-items: center;
+    padding-left: 40px;
+    padding-right: 80px;
+}
+
+#here-were-the-words{
+    font-size: 36px;
+}
+
+#your-score-is {
+    font-size: 28px;
+    margin-top: 8px;
+}
+
+#score {
+    font-size: 72px;
+}
+
+#number-of-words {
+    font-size: 28px;
+}
+
+#number-of-words-box{
+    align-items: end;
+}
+
+#result-content {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+#result-num {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+#list-of-words {
+    list-style: none;
+}
+
+#word-list {
+    overflow: scroll;
+    height: 100%;
+    text-align: center;
+}
+
+.screen.active {
+    display: block;
+}

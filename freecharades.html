@@ -4,22 +4,143 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <title>Free Charades</title>
-
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Alata&family=Henny+Penny&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="styles.css" />
     </head>
     <body>
-        <h1>Free Charades</h1>
-        <p>This is fun!</p>
-        <p id="word">Hampster</p>
-        <p id="timer">Timer</p>
-        <button id="start">Start</button>
-        <button id="end">End</button>
-        <button id="wrong">
-            Wrong
-        </button>
-        <button id="correct">
-            Correct
-        </button>
-        <p id="score">Score</p>
+
+        <div id="starting-screen" class="screen active">
+            <div id="starting-screen-cont">
+                <div id="starting-screen-content">
+                    <div class="logo-container">
+                        <img src="logo.png" class="logo"> 
+                        <h1 class="brand-name">Free Charades</h1>
+                    </div>
+                    <button id="start" class="primary-button">Start</button>
+                    <button id="instruction-button" class="secondary-button">How to Play?</button>
+                    <button id="acknowledgements-button" class="secondary-button">Acknowledgements</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="flip-180-screen" class="screen">
+            <div id="flip-180-screen-cont">
+                <div id="flip-180-screen-content">
+                    <div class="logo-container">
+                        <img src="logo.png" class="logo"> 
+                        <h1 class="brand-name">Free Charades</h1>
+                    </div>
+                    <img id="flip-180" src="flip-180.png">
+                    <p id="instruction-line1">Please flip your phone to 180<sup>o</sup></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="flip-90-screen" class="screen">
+            <div id="flip-90-screen-cont">
+                <div id="flip-90-screen-content">
+                    <div class="logo-container">
+                        <img src="logo.png" class="logo"> 
+                        <h1 class="brand-name">Free Charades</h1>
+                    </div>
+                    <img id="flip-90" src="flip-90.png">
+                    <p id="instruction-line2">Please flip your phone to landscape</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="instruction-screen" class="screen">
+            <buton id= "back-instruction" class="back-button">« Back</buton>
+            <h1 id="how-to-play">How to Play?</h1>
+            <ol id="instructions">
+                <li>Press 'Start' and then hold the phone up on your forehead, facing the audience.</li>
+                <li>After the countdown, the session will start and a word or phrase will show on the screen. The audience should act out the word or phrase, without using words.</li>
+                <li>You have to guess the word or phrase by saying it out loud. Tthe audience will tell you if you guessed it right or not.</li>
+                <li>If you guessed it right, flip the phone up above your head, and the back down onto your forehead.</li>
+                <li>To move on to the next word without gurssing correctly, flip the phone down and back up.</li>
+                <li>Your score is displayed at the end of the session.</li>
+            </ol>
+        </div>
+
+        <div id="acknowledgements-screen" class="screen">
+            <buton id="back-acknowledgements" class="back-button">« Back</buton>
+            <h1 id="acknowledgements">Acknowledgements</h1>
+            <div id="designers">
+                <p>Made by Phuong Khuu &copy; 2023</p>
+                <p>Site designed by Daniel Li</p>
+                <p>Timer icon by <a href="http://thenounproject.com/browse/icons/term/time-melts-away/" target="_blank" title="Time melts away Icons">Ian Vibbert</a></p>
+                <p>Rotate phone icon by <a href="http://thenounproject.com/browse/icons/term/rotate-phone/" target="_blank" title="Rotate Phone Icons">Kelig Le Luron</a></p>
+            </div>
+        </div>
+
+        <div id="countdown-screen" class="screen">
+            <div id="countdown-screen-content">
+                <p id="timer">Timer</p>
+            </div>
+        </div>
+
+        <div id="word-screen" class="screen">
+            <div id="word-screen-content">
+                <div id="session-time">
+                    <img src="clock.png" id="clock">
+                    <p id="play-timer">64</p>
+                </div>
+                <p id="word">Hampster</p>
+                <button id="wrong">
+                    Wrong
+                </button>
+                <button id="correct">
+                    Correct
+                </button>
+            </div>
+        </div>
+
+        <div id="ending-screen" class="screen">
+            <div id="ending-screen-content">
+                <div id="left">
+                    <p id="here-were-the-words">Here were the words</p>
+                    <div id="word-list">
+                        <ul id="list-of-words">
+                            <li>apple</li>
+                            <li>apple</li>
+                            <li>apple</li>
+                            <li>apple</li>
+                            <li>apple</li>
+                            <li>apple</li>
+                            <li>apple</li>
+                            <li>apple</li>
+                            <li>apple</li>
+                            <li>apple</li>
+                            <li>apple</li>
+                            <li>apple</li>
+                            <li>apple</li>
+                            <li>apple</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div id="right">
+                        <div id="result-content">
+                            <div id="result">
+                                <h1>Time's up!</h1>
+                                <p id="your-score-is">Your score is</p>
+                            </div>
+                            <div id="result-num">
+                                <p id="score">7</p>
+                                <div id="number-of-words-box">
+                                    <p id="number-of-words">/12</p>
+                                </div>
+                            </div>
+                        </div>
+                    <button id="restart" class="primary-button">Restart</button>
+                    <button id="back-home" class="secondary-button">Back to Home</button>
+                    </div>    
+                </div>
+            </div>
+        </div>
+       
         <script>
 
             // Constants
@@ -37,8 +158,92 @@
             const wrongButton = document.getElementById("wrong");
             const correctButton = document.getElementById("correct");
             const startButton = document.getElementById("start");
+            const restartButton = document.getElementById("restart");
+            const instructionButton = document.getElementById("instruction-button");
+            const acknowledgementsButton = document.getElementById("acknowledgements-button");
+            const backHomeButton = document.getElementById("back-home");
+            const backAcknowledgements = document.getElementById("back-acknowledgements");
+            const backInstruction = document.getElementById("back-instruction");
+
             const wordParagraph = document.getElementById("word");
             const scoreParagraph = document.getElementById("score");
+
+            const startingScreen = document.getElementById("starting-screen");
+            const flipScreen180 = document.getElementById("flip-180-screen");
+            const flipScreen90 = document.getElementById("flip-90-screen");
+            const instructionScreen = document.getElementById("instruction-screen");
+            const acknowledgementsScreen =document.getElementById("acknowledgements-screen");
+            const countdownScreen = document.getElementById("countdown-screen");
+            const wordScreen = document.getElementById("word-screen");
+            const endingScreen = document.getElementById("ending-screen");
+            const arrayScreen = [
+                startingScreen,
+                flipScreen180,
+                flipScreen90,
+                instructionScreen,
+                acknowledgementsScreen,
+                countdownScreen,
+                wordScreen,
+                endingScreen
+            ];
+
+            function setActive(screen) {
+                for (let i = 0; i < arrayScreen.length; i++) {
+                    // If the current screen has an ID that matches screenId
+                    // Add the "active" class to the screen element
+                    if (arrayScreen[i] === screen) {
+                        arrayScreen[i].classList.add("active");
+                    }
+                    // Otherwise, remove the active class
+                    else {
+                        arrayScreen[i].classList.remove("active");
+                    }
+                } 
+            }
+
+            instructionButton.addEventListener("click", function(){
+                setActive(instructionScreen)
+            });
+
+            acknowledgementsButton.addEventListener("click", function(){
+                setActive(acknowledgementsScreen)
+            });
+
+            backAcknowledgements.addEventListener("click", function(){
+                setActive(startingScreen)
+            });
+
+            backInstruction.addEventListener("click", function(){
+                setActive(startingScreen)
+            });
+
+            backHomeButton.addEventListener("click", function(){
+                setActive(startingScreen)
+            });
+
+            function gameStart() {
+                setActive(countdownScreen);
+                setScore(STARTING_SCORE);
+                currentWordList = [...originalWordList];
+                
+                countDown(COUNTDOWN_DURATION_SECONDS, () => { 
+                    setActive(wordScreen);
+                    showRandomWord();
+                
+                    countDown(SESSION_DURATION_SECONDS, () => {
+                        setActive(endingScreen);
+                        console.log("end")
+                    })
+                });
+            }
+
+            startButton.addEventListener("click", function() {
+                gameStart()
+            });
+
+            restartButton.addEventListener("click", function(){
+                gameStart()
+            });
 
             const setScore = (scoreToSet) => {
                 score = scoreToSet;
@@ -81,19 +286,9 @@
                 time = timeToSet;
                 const timerParagraph = document.getElementById("timer");
                 timerParagraph.innerHTML = time;
+                const playTimerParagraph = document.getElementById("play-timer");
+                playTimerParagraph.innerHTML = time;
             }
-
-            startButton.addEventListener("click", function() {
-                setScore(STARTING_SCORE);
-                currentWordList = [...originalWordList];
-                
-                countDown(COUNTDOWN_DURATION_SECONDS, () => { 
-                    showRandomWord();
-                    countDown(SESSION_DURATION_SECONDS, () => {
-                        console.log("end")
-                    })
-                });
-            });
         </script>
     </body>
 </html>
