@@ -298,6 +298,12 @@
                 // for each result I add one li element back into the list of words
                 resultWordList.forEach(result => {
                     const li = document.createElement("li");
+
+                    // if it's incorrect, add an incorrect class to the element
+                    if (result.correct === false) {
+                        li.classList.add("incorrect");
+                    }
+
                     const resultWord = document.createTextNode(result.word);
                     li.appendChild(resultWord);
                     listOfWords.appendChild(li);
