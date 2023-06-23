@@ -10,7 +10,6 @@
         <link rel="stylesheet" type="text/css" href="styles.css" />
     </head>
     <body>
-
         <div id="permission-request-screen" class="screen overlay">
             <div id="permission-request-screen-cont">
                 <div id="permission-request-screen-content">
@@ -103,12 +102,6 @@
                     <p id="play-timer">64</p>
                 </div>
                 <p id="word">Hampster</p>
-                <button id="wrong">
-                    Wrong
-                </button>
-                <button id="correct">
-                    Correct
-                </button>
             </div>
         </div>
 
@@ -199,8 +192,6 @@
 
             //getting html references to js variables
             const requestOrientationPermissionsButton = document.getElementById("request-orientation-permission-button");
-            const wrongButton = document.getElementById("wrong");
-            const correctButton = document.getElementById("correct");
             const startButton = document.getElementById("start");
             const restartButton = document.getElementById("restart");
             const instructionButton = document.getElementById("instruction-button");
@@ -352,46 +343,62 @@
                 })
             }
 
-            instructionButton.addEventListener("click", function(){
+            instructionButton.addEventListener('click', function(){
                 setActive(instructionScreen)
             });
 
-            acknowledgementsButton.addEventListener("click", function(){
+            acknowledgementsButton.addEventListener('click', function(){
                 setActive(acknowledgementsScreen)
             });
 
-            backAcknowledgements.addEventListener("click", function(){
+            backAcknowledgements.addEventListener('click', function(){
                 setActive(startingScreen)
             });
 
-            backInstruction.addEventListener("click", function(){
+            backInstruction.addEventListener('click', function(){
                 setActive(startingScreen)
             });
 
-            backHomeButton.addEventListener("click", function(){
+            backHomeButton.addEventListener('click', function(){
                 setActive(startingScreen)
             });
 
-            startButton.addEventListener("click", function() {
+            startButton.addEventListener('click', function() {
                 gameStart()
             });
 
-            restartButton.addEventListener("click", function(){
+            restartButton.addEventListener('click', function(){
                 gameStart()
             });
 
-            wrongButton.addEventListener("click", function(){
-                storeWord(false);
-                showRandomWord()
-            });
-            
-            correctButton.addEventListener("click", function(){
-                storeWord(true);
-                showRandomWord();
-            });
+            function gammaToDecision(gam) {
+                if (1 < gam && gam < 35) {
+                    return 'correct';
+                }
+                else if (-40 < gam && gam < -1) {
+                    return 'incorrect';
+                }
+                else {
+                    return 'normal';
+                }
+            }
 
 
-            const handleOrientation = () => {}
+            let previousDecision;
+
+            const handleOrientation = (event) => {
+                const currentDecision = gammaToDecision(event.gamma);
+
+                if (currentDecision === 'correct' && previousDecision === 'normal') {
+                    storeWord(true);
+                    showRandomWord();
+                }
+                else if (currentDecision === 'incorrect' && previousDecision === 'normal') {
+                    storeWord(false);
+                    showRandomWord();
+                }
+                previousDecision = currentDecision
+            };
             
             if (typeof DeviceOrientationEvent.requestPermission === 'function') {
                 // iOS
