@@ -9,7 +9,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Alata&family=Henny+Penny&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="styles.css" />
     </head>
-    <body>
+    <body id="container">
+        <button id="fullscreen" class="secondary-button">⛶</button>
         <div id="permission-request-screen" class="screen overlay">
             <div id="permission-request-screen-cont">
                 <div id="permission-request-screen-content">
@@ -191,6 +192,7 @@
             let previousScreen;
 
             //getting html references to js variables
+            const container = document.getElementById("container");
             const requestOrientationPermissionsButton = document.getElementById("request-orientation-permission-button");
             const startButton = document.getElementById("start");
             const restartButton = document.getElementById("restart");
@@ -206,6 +208,7 @@
             const playTimerParagraph = document.getElementById("play-timer");
             const listOfWords = document.getElementById("list-of-words");
             const numberOfWords = document.getElementById("number-of-words");
+            const fullScreenButton = document.getElementById("fullscreen");
 
             const permissionRequestScreen = document.getElementById("permission-request-screen");
             const startingScreen = document.getElementById("starting-screen");
@@ -445,6 +448,14 @@
             flipScreen();
             window.addEventListener("focus", flipScreen);
             screen.orientation.addEventListener("change", flipScreen);
+
+            fullScreenButton.addEventListener('click', () => {
+                if (!document.fullscreenElement) {
+                    container.requestFullscreen()
+                } else {
+                    document.exitFullscreen();
+                }
+            })
         </script>
     </body>
 </html>

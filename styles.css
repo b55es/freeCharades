@@ -319,3 +319,13 @@ html {
     margin: 0;
     height: 100%;
 }
+
+#fullscreen {
+    z-index: 50;
+    position: fixed;
+    top: 0;
+    right: 0;
+    font-size: 32px;
+    line-height: 32px;
+    padding: 12px;
+}
