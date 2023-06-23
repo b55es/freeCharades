@@ -263,17 +263,7 @@
             }
 
             function setOverlay(screen) {
-                for (let i = 0; i < arrayScreen.length; i++) {
-                    // If the current screen has an ID that matches screenId
-                    // Add the "overlay" class to the screen element
-                    if (arrayScreen[i] === screen) {
-                        arrayScreen[i].classList.add("overlay");
-                    }
-                    // Otherwise, remove the overlay class
-                    else {
-                        arrayScreen[i].classList.remove("overlay");
-                    }
-                } 
+                screen.classList.add("overlay");
             }
 
             function removeOverlay(screen) {
@@ -430,11 +420,13 @@
                 // if the screen is vertical, show flipScreen90
                 if (screen.orientation.type === "portrait-primary" || screen.orientation.type === "portrait-secondary") {
                     setOverlay(flipScreen90);
+                    removeOverlay(flipScreen180);
                 }
                 // if the screen , show flipScreen180
                 // Android doesn't have landscape-secondary
                 else if (screen.orientation.type === "landscape-secondary") {
                     setOverlay(flipScreen180);
+                    removeOverlay(flipScreen90);
                 }
                 // remove class overlay from the flip screens
                 else {
