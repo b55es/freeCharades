@@ -195,6 +195,7 @@
             let currentWordList = [];
             let resultWordList = [];
             let time;
+            let previousScreen;
 
             //getting html references to js variables
             const requestOrientationPermissionsButton = document.getElementById("request-orientation-permission-button");
@@ -236,7 +237,18 @@
                 endingScreen
             ];
 
+            function storePreviousScreen() {
+                const currentActiveScreen = arrayScreen.filter((screen) => screen.classList.contains("active"))[0];
+                if (currentActiveScreen === flipScreen180 || currentActiveScreen === flipScreen90) {
+                    // Do nothing
+                } else {
+                previousScreen = currentActiveScreen
+                }
+            }
+            storePreviousScreen()
+
             function setActive(screen) {
+                storePreviousScreen()
                 for (let i = 0; i < arrayScreen.length; i++) {
                     // If the current screen has an ID that matches screenId
                     // Add the "active" class to the screen element
@@ -248,6 +260,24 @@
                         arrayScreen[i].classList.remove("active");
                     }
                 } 
+            }
+
+            function setOverlay(screen) {
+                for (let i = 0; i < arrayScreen.length; i++) {
+                    // If the current screen has an ID that matches screenId
+                    // Add the "overlay" class to the screen element
+                    if (arrayScreen[i] === screen) {
+                        arrayScreen[i].classList.add("overlay");
+                    }
+                    // Otherwise, remove the overlay class
+                    else {
+                        arrayScreen[i].classList.remove("overlay");
+                    }
+                } 
+            }
+
+            function removeOverlay(screen) {
+                screen.classList.remove("overlay");
             }
 
             const showRandomWord = () => {
@@ -381,7 +411,7 @@
                     promise.then((state) => {
                         if (state === 'granted') {
                             window.addEventListener('deviceorientation', handleOrientation);
-                            permissionRequestScreen.classList.remove("overlay");
+                            removeOverlay(permissionRequestScreen);
 
                         } else {
                             console.error('Request to access the orientation was rejected');
@@ -392,24 +422,24 @@
             } else {
                 // non-iOS
                 window.addEventListener('deviceorientation', handleOrientation);
-                permissionRequestScreen.classList.remove("overlay");
-
+                removeOverlay(permissionRequestScreen);
             }
 
             // write a function 
-            function flipScreen(){
+            function flipScreen() {
                 // if the screen is vertical, show flipScreen90
                 if (screen.orientation.type === "portrait-primary" || screen.orientation.type === "portrait-secondary") {
-                    setActive(flipScreen90);
+                    setOverlay(flipScreen90);
                 }
                 // if the screen , show flipScreen180
                 // Android doesn't have landscape-secondary
                 else if (screen.orientation.type === "landscape-secondary") {
-                    setActive(flipScreen180);
+                    setOverlay(flipScreen180);
                 }
-                //
+                // remove class overlay from the flip screens
                 else {
-                    setActive(startingScreen);
+                    removeOverlay(flipScreen90);
+                    removeOverlay(flipScreen180);
                 }
             }
 
