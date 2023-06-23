@@ -87,6 +87,8 @@
                 <p>Site designed by Daniel Li</p>
                 <p>Timer icon by <a href="http://thenounproject.com/browse/icons/term/time-melts-away/" target="_blank" title="Time melts away Icons">Ian Vibbert</a></p>
                 <p>Rotate phone icon by <a href="http://thenounproject.com/browse/icons/term/rotate-phone/" target="_blank" title="Rotate Phone Icons">Kelig Le Luron</a></p>
+                <p>Most sound effects are from <a href="https://pixabay.com/">Pixabay</a></p>
+                <p>Countdown sound effect by <a href="https://pixabay.com/users/irinairinafomicheva-25140203/">irinairinafomicheva</a></a></p>
             </div>
         </div>
 
@@ -190,6 +192,18 @@
             let resultWordList = [];
             let time;
             let previousScreen;
+
+            const tickSound = new Audio("/tick.mp3")
+            const startSound = new Audio("/start.mp3");
+            const correctSound = new Audio("/correct.mp3");
+            const passSound = new Audio("/pass.mp3");
+            const endSound = new Audio("/clap.wav");
+
+            tickSound.load();
+            startSound.load();
+            correctSound.load();
+            passSound.load();
+            endSound.load();
 
             //getting html references to js variables
             const container = document.getElementById("container");
@@ -296,22 +310,30 @@
                 resultWordList = [];
                 currentWordList = [...originalWordList];
                 
-                countDown(COUNTDOWN_DURATION_SECONDS, () => { 
+                countDown(COUNTDOWN_DURATION_SECONDS, () => {
+                    startSound.play();
                     setActive(wordScreen);
                     showRandomWord();
                 
                     countDown(SESSION_DURATION_SECONDS, () => {
+                        endSound.play();
                         showResultList();
                         showScore()
                         setActive(endingScreen);
                     })
-                });
+                }, true);
             }
 
-            const countDown = (duration, callback) => {
+            const countDown = (duration, callback, playSound = false) => {
+                if (playSound) {
+                    tickSound.play()
+                }
                 setTime(duration);
                 const intervalId = setInterval(() => {
                     if (time > 0) {
+                        if (playSound) {
+                            tickSound.play()
+                        }
                         setTime(time - 1);
                     }
                     if (time === 0) {
@@ -393,10 +415,12 @@
                 const currentDecision = gammaToDecision(event.gamma);
 
                 if (currentDecision === 'correct' && previousDecision === 'normal') {
+                    correctSound.play();
                     storeWord(true);
                     showRandomWord();
                 }
                 else if (currentDecision === 'incorrect' && previousDecision === 'normal') {
+                    passSound.play();
                     storeWord(false);
                     showRandomWord();
                 }
