@@ -396,6 +396,26 @@
 
             }
 
+            // write a function 
+            function flipScreen(){
+                // if the screen is vertical, show flipScreen90
+                if (screen.orientation.type === "portrait-primary" || screen.orientation.type === "portrait-secondary") {
+                    setActive(flipScreen90);
+                }
+                // if the screen , show flipScreen180
+                // Android doesn't have landscape-secondary
+                else if (screen.orientation.type === "landscape-secondary") {
+                    setActive(flipScreen180);
+                }
+                //
+                else {
+                    setActive(startingScreen);
+                }
+            }
+
+            flipScreen();
+            window.addEventListener("focus", flipScreen);
+            screen.orientation.addEventListener("change", flipScreen);
         </script>
     </body>
 </html>
