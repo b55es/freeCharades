@@ -8,9 +8,12 @@ button {
 }
 
 .screen {
+    position: fixed;
+    top: 0;
+    left: 0;
     background-color: #fdd121;
-    height: 390px;
-    width: 884px;
+    height: 100%;
+    width: 100%;
     overflow: hidden;
     font-family: 'Henny Penny', cursive;
     color: #250f48;
@@ -38,6 +41,29 @@ button {
 .logo-container {
     display: flex;
     align-items: baseline;
+}
+
+#permission-request-screen-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#permission-request-screen-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#request-orientation-permission-button {
+    margin-top: 20px;
+}
+
+#permission-request-instruction {
+    margin-top:  20px;
+    font-family: 'Alata', sans-serif;
 }
 
 #flip-180-screen-cont {
@@ -275,10 +301,21 @@ a {
     text-align: center;
 }
 
-.screen.active {
+.screen.active,
+.screen.overlay {
     display: block;
+}
+
+.screen.overlay {
+    z-index: 99;
 }
 
 .incorrect {
     opacity: 50%;
+}
+
+body,
+html {
+    margin: 0;
+    height: 100%;
 }

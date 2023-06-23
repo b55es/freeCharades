@@ -11,6 +11,21 @@
     </head>
     <body>
 
+        <div id="permission-request-screen" class="screen overlay">
+            <div id="permission-request-screen-cont">
+                <div id="permission-request-screen-content">
+                    <div class="logo-container">
+                        <img src="logo.png" class="logo"> 
+                        <h1 class="brand-name">Free Charades</h1>
+                    </div>
+                    <img id="flip-90" src="flip-90.png">
+                    <p id="permission-request-instruction">For Free Charades to work, we need to know the orientation of your device. Please press the 'Authorize' button below, and on the dialog box that appears, press 'Allow'.
+                    </p>
+                    <button id="request-orientation-permission-button" class="primary-button">Authorize</button>                  
+                </div>
+            </div>
+        </div>
+
         <div id="starting-screen" class="screen active">
             <div id="starting-screen-cont">
                 <div id="starting-screen-content">
@@ -182,6 +197,7 @@
             let time;
 
             //getting html references to js variables
+            const requestOrientationPermissionsButton = document.getElementById("request-orientation-permission-button");
             const wrongButton = document.getElementById("wrong");
             const correctButton = document.getElementById("correct");
             const startButton = document.getElementById("start");
@@ -199,6 +215,7 @@
             const listOfWords = document.getElementById("list-of-words");
             const numberOfWords = document.getElementById("number-of-words");
 
+            const permissionRequestScreen = document.getElementById("permission-request-screen");
             const startingScreen = document.getElementById("starting-screen");
             const flipScreen180 = document.getElementById("flip-180-screen");
             const flipScreen90 = document.getElementById("flip-90-screen");
@@ -208,6 +225,7 @@
             const wordScreen = document.getElementById("word-screen");
             const endingScreen = document.getElementById("ending-screen");
             const arrayScreen = [
+                permissionRequestScreen,
                 startingScreen,
                 flipScreen180,
                 flipScreen90,
@@ -351,6 +369,32 @@
                 storeWord(true);
                 showRandomWord();
             });
+
+
+            const handleOrientation = () => {}
+            
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                // iOS
+                requestOrientationPermissionsButton.addEventListener('click', () => {
+                    const promise = DeviceOrientationEvent.requestPermission()
+
+                    promise.then((state) => {
+                        if (state === 'granted') {
+                            window.addEventListener('deviceorientation', handleOrientation);
+                            permissionRequestScreen.classList.remove("overlay");
+
+                        } else {
+                            console.error('Request to access the orientation was rejected');
+                        }
+                    })
+                    .catch(console.error);
+                });
+            } else {
+                // non-iOS
+                window.addEventListener('deviceorientation', handleOrientation);
+                permissionRequestScreen.classList.remove("overlay");
+
+            }
 
         </script>
     </body>
